@@ -87,10 +87,10 @@ const getAllUsers = async (req, res) => {
 
 // get a single user
 const getUser = async (req, res) => {
-  const { id } = req.params;
+  const  userid  = req?.user?.id;
   const user = await prisma.user.findUnique({
     where: {
-      id: id,
+      id: userid,
     },
     include: {
       profile: true,
@@ -122,22 +122,24 @@ const getUsersByBloodGroupAndLocation = async (req, res) => {
 
 // update a user
 const updateUser = async (req, res) => {
-  const { id } = req.params;
+  const  userid  = req.user.id;
   const { name, email, password, number, blood_group, location, available } =
     req.body;
+
+    const oldUser = await prisma.user.findUnique({
+      where: {
+        id: userid,
+      },
+    });
+
+
   const user = await prisma.user.update({
     where: {
-      id: id,
-      name,
-      email,
-      password,
-      number,
-      blood_group,
-      location,
-      available,
+      id: userid,
     },
     data: {
-      ...req.body,
+      ...oldUser,
+      ...req.body
     },
   });
   res.status(200).json(user);
