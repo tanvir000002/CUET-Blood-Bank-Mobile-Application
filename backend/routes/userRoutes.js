@@ -27,6 +27,7 @@ router.get("/users/bloodloc",  getUsersByBloodGroupAndLocation);
 
 
 // admin routes
+//admin
 
 router.get("/users/profile", authMiddleware, verifyUser, getUser);
 router.put("/users/edit-profile", authMiddleware, verifyUser, updateUser);
