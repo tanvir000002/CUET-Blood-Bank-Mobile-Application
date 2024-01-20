@@ -62,7 +62,7 @@ const loginUser = async (req, res) => {
       .cookie("token", token, {
         httpOnly: true,
         // secure: true,
-        maxAge: 1000 * 60 * 60 * 24 * 3,
+        maxAge: 1000 * 60 * 60 * 24 * 3, // Token expiration time (3 days in milliseconds)
       })
       .status(200)
       .json({
@@ -92,9 +92,7 @@ const getUser = async (req, res) => {
     where: {
       id: userid,
     },
-    include: {
-      profile: true,
-    },
+
   });
   res.status(200).json(user);
 };
