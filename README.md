@@ -1,1 +1,2 @@
 # CUET-Blood-Bank-Mobile-Application
+Welcome to the CUET Blood Bank Mobile Application repository! This mobile application is designed to serve as a blood donation and request platform for the Chittagong University of Engineering and Technology (CUET) community. The app aims to connect blood donors with those in need, making it easier to find and provide life-saving blood donations.

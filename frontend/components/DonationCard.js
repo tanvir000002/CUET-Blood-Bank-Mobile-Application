@@ -9,7 +9,6 @@ import { axiosInstance } from '../config/axios'
 import { PostUpdate } from '../screens';
 
 const DonationCard = ({ name, location, postedDate, number, details, amount, blood_group, id, userId,navigation }) => {
-  // localStorage.setItem("postId",id);
 
   const [profile, setProfile] = useState({});
 
@@ -31,7 +30,7 @@ const DonationCard = ({ name, location, postedDate, number, details, amount, blo
         })
         .catch((error) => alert(error.message))
 }
-//console.log("users",profile.id)
+
 const handleUpdate = () => {
       if(profile.id==userId){
         navigation.navigate('EditPost',{id})
