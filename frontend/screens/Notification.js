@@ -23,7 +23,7 @@ const Notification = ({ navigation }) => {
                 }}
             >
                 <TouchableOpacity
-                    onPress={() => navigation.navigate('Home')}
+                    onPress={() => navigation.navigate('NotificationPost')}
                     style={{
                         height: 44,
                         width: 44,
@@ -68,7 +68,8 @@ const Notification = ({ navigation }) => {
     return (
         
       <TouchableOpacity
-      onPress={() => navigation.navigate('Home')}
+      onPress={() => navigation.navigate('NotificationPost',{ id: item.id })}
+      //onPress={() => navigation.navigate('Home')}
         style={{
           flexDirection: 'row',
           alignItems: 'center',
