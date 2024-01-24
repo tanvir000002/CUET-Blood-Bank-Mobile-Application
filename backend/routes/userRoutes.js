@@ -10,7 +10,6 @@ const {
   getUsersByBloodGroupAndLocation,
 } = require("../controllers/userController");
 const {
-  isAdmin,
   authMiddleware,
   verifyUser,
 } = require("../middlewares/authMiddleware");
@@ -25,9 +24,6 @@ router.get("/users/logout", logoutUser);
 router.get("/users/",  getAllUsers);
 router.get("/users/bloodloc",  getUsersByBloodGroupAndLocation);
 
-
-// admin routes
-//admin
 
 router.get("/users/profile", authMiddleware, verifyUser, getUser);
 router.put("/users/edit-profile", authMiddleware, verifyUser, updateUser);

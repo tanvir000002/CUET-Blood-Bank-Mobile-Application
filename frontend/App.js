@@ -13,7 +13,8 @@ import {
     Notification,
     Post,
     EditProfile,
-    EditPost
+    EditPost, 
+    NotificationPost
 } from './screens'
 import { useFonts } from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen'
@@ -154,6 +155,13 @@ export default function App() {
                 <Stack.Screen
                     name="EditPost"
                     component={EditPost}
+                    options={{
+                        headerShown: false,
+                    }}
+                />
+                <Stack.Screen
+                    name="NotificationPost"
+                    component={NotificationPost}
                     options={{
                         headerShown: false,
                     }}

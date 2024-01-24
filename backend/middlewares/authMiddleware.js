@@ -42,26 +42,6 @@ const verifyUser = async (req, res, next) => {
   }
 };
 
-const verifySeller = async (req, res, next) => {
-  const { email } = req.user;
 
-  const adminUser = await prisma.user.findUnique({ where: { email } });
-  if (adminUser.role !== "USER") {
-    return res.status(400).json({ message: "You are not a USER!" });
-  } else {
-    next();
-  }
-};
 
-const isAdmin = async (req, res, next) => {
-  const { email } = req.user;
-
-  const adminUser = await prisma.user.findUnique({ where: { email } });
-  if (adminUser.role !== "ADMIN") {
-    return res.status(400).json({ message: "You are not an ADMIN!" });
-  } else {
-    next();
-  }
-};
-
-module.exports = { authMiddleware, isAdmin, verifyUser, verifySeller };
+module.exports = { authMiddleware, verifyUser};

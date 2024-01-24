@@ -13,28 +13,28 @@ const getAllPosts = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
-//update post 
+
+
 const updatePost = async (req, res) => {
   const { postId } = req.params;
-  const { name,
-    number,
-    blood_group,
-    amount,
-    location,
-    details } = req.body;
+    const oldPost = await prisma.post.findUnique({
+      where: {
+        id: postId,
+      },
+    });
 
+    if (oldPost.userId !== req.user.id) {
+      return res.status(403).json({ error: "Permission denied. You are not the owner of this post." });
+    }
+    
   try {
     const post = await prisma.post.update({
       where: {
         id: postId,
       },
       data: {
-        name,
-        number,
-        blood_group,
-        amount,
-        location,
-        details
+        ...oldPost,
+        ...req.body
       },
     });
     res.status(200).json(post);
@@ -71,8 +71,10 @@ const createPost = async (req, res) => {
       amount,
       location,
       details,
+      notification,
     } = req.body;
     console.log({ name, number, blood_group, amount });
+      let notificationText = `${name} urgently requires ${amount} bag(s) of ${blood_group} blood at ${location}.`;
       const post = await prisma.post.create({
       data: {
         name,
@@ -82,6 +84,7 @@ const createPost = async (req, res) => {
         location,
         details,
         userId: req?.user.id,
+        notification: notificationText,
       },
     });
     
@@ -95,9 +98,11 @@ const createPost = async (req, res) => {
 const deletePost = async (req, res) => {
   try {
     const { postId } = req.params;
+
     const post = await prisma.post.delete({
       where: {
         id: postId,
+        userId: req.user.id,
       },
     });
     res.status(201).json(post);

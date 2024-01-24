@@ -1,51 +1,304 @@
 {
-    "openapi": "3.0.0",
-    "info": {
-      "title": "CUET Blood Bank",
-      "description": "This is a simple API ",
-      "contact": {
-        "email": "tanvir200021d0@gmail.com"
+  "openapi": "3.0.0",
+  "info": {
+    "title": "CUET Blood Bank",
+    "description": "This is a simple API ",
+    "contact": {
+      "email": "tanvir200021d0@gmail.com"
+    },
+    
+    "version": "1.0.11"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "tags": [
+    {
+      "name": "users",
+      "description": "Everything about users"
+    },
+    {
+      "name": "posts",
+      "description": "Access to Posts"
+      
+    },
+    {
+      "name": "profile",
+      "description": "Operations about user profile"
+    }
+  ],
+  "paths": {
+      "/users": {
+          "get": {
+            "tags": [
+                "users"
+              ],
+            "summary": "Get all users",
+            "responses": {
+              "200": {
+                "description": "List of users",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/User"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+      "/users/register": {
+        "post": {
+          "tags": [
+              "users"
+            ],
+          "summary": "Register a new user",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserInput"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "User created successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/users/login": {
+          
+        "post": {
+          "tags": [
+              "users"
+            ],
+          "summary": "Login user",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string",
+                      "format": "email"
+                    },
+                    "password": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["email", "password"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Login successful",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "user": {
+                        "$ref": "#/components/schemas/User"
+                      },
+                      "token": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/users/logout": {
+          
+        "get": {
+          "tags": [
+              "users"
+            ],
+          "summary": "Logout user",
+          "responses": {
+            "200": {
+              "description": "Logged out successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       },
       
-      "version": "1.0.11"
-    },
-    "servers": [
-      {
-        "url": "http://localhost:3000"
-      }
-    ],
-    "tags": [
-      {
-        "name": "users",
-        "description": "Everything about users"
+      "/users/{id}": {
+          
+        "get": {
+          "tags": [
+              "users"
+            ],
+          "summary": "Get user by ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "User found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "put": {
+          "tags": [
+              "users"
+            ],
+          "summary": "Update user by ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserInput"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "User updated successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "delete": {
+          "tags": [
+              "users"
+            ],
+          "summary": "Delete user by ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "User deleted successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          }
+        }
       },
-      {
-        "name": "posts",
-        "description": "Access to Posts"
-        
-      },
-      {
-        "name": "profile",
-        "description": "Operations about user profile"
-      }
-    ],
-    "paths": {
-        "/users": {
-            "get": {
-              "tags": [
-                  "users"
-                ],
-              "summary": "Get all users",
-              "responses": {
-                "200": {
-                  "description": "List of users",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "type": "array",
-                        "items": {
-                          "$ref": "#/components/schemas/User"
-                        }
+      "/posts": {
+          "get": {
+              "tags": ["posts"],
+                            "summary": "Get all posts",
+            "responses": {
+              "200": {
+                "description": "List of posts",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Post"
                       }
                     }
                   }
@@ -53,35 +306,32 @@
               }
             }
           },
-        "/users/register": {
           "post": {
-            "tags": [
-                "users"
-              ],
-            "summary": "Register a new user",
+              "tags": ["posts"],
+            "summary": "Create a new post",
             "requestBody": {
               "required": true,
               "content": {
                 "application/json": {
                   "schema": {
-                    "$ref": "#/components/schemas/UserInput"
+                    "$ref": "#/components/schemas/NewPost"
                   }
                 }
               }
             },
             "responses": {
               "201": {
-                "description": "User created successfully",
+                "description": "Post created successfully",
                 "content": {
                   "application/json": {
                     "schema": {
-                      "$ref": "#/components/schemas/User"
+                      "$ref": "#/components/schemas/Post"
                     }
                   }
                 }
               },
-              "400": {
-                "description": "Bad request",
+              "500": {
+                "description": "Internal server error",
                 "content": {
                   "application/json": {
                     "schema": {
@@ -98,107 +348,13 @@
             }
           }
         },
-        "/users/login": {
-            
-          "post": {
-            "tags": [
-                "users"
-              ],
-            "summary": "Login user",
-            "requestBody": {
-              "required": true,
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "email": {
-                        "type": "string",
-                        "format": "email"
-                      },
-                      "password": {
-                        "type": "string"
-                      }
-                    },
-                    "required": ["email", "password"]
-                  }
-                }
-              }
-            },
-            "responses": {
-              "200": {
-                "description": "Login successful",
-                "content": {
-                  "application/json": {
-                    "schema": {
-                      "type": "object",
-                      "properties": {
-                        "user": {
-                          "$ref": "#/components/schemas/User"
-                        },
-                        "token": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              "400": {
-                "description": "Bad request",
-                "content": {
-                  "application/json": {
-                    "schema": {
-                      "type": "object",
-                      "properties": {
-                        "error": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "/users/logout": {
-            
+        "/posts/{postId}": {
           "get": {
-            "tags": [
-                "users"
-              ],
-            "summary": "Logout user",
-            "responses": {
-              "200": {
-                "description": "Logged out successfully",
-                "content": {
-                  "application/json": {
-                    "schema": {
-                      "type": "object",
-                      "properties": {
-                        "message": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        
-        "/users/{id}": {
-            
-          "get": {
-            "tags": [
-                "users"
-              ],
-            "summary": "Get user by ID",
+              "tags": ["posts"],
+            "summary": "Get a post by ID",
             "parameters": [
               {
-                "name": "id",
+                "name": "postId",
                 "in": "path",
                 "required": true,
                 "schema": {
@@ -208,25 +364,22 @@
             ],
             "responses": {
               "200": {
-                "description": "User found",
+                "description": "Post found",
                 "content": {
                   "application/json": {
                     "schema": {
-                      "$ref": "#/components/schemas/User"
+                      "$ref": "#/components/schemas/Post"
                     }
                   }
                 }
               }
             }
           },
-          "put": {
-            "tags": [
-                "users"
-              ],
-            "summary": "Update user by ID",
+          "put": { "tags": ["posts"],
+            "summary": "Update a post by ID",
             "parameters": [
               {
-                "name": "id",
+                "name": "postId",
                 "in": "path",
                 "required": true,
                 "schema": {
@@ -239,18 +392,33 @@
               "content": {
                 "application/json": {
                   "schema": {
-                    "$ref": "#/components/schemas/UserInput"
+                    "$ref": "#/components/schemas/UpdatePost"
                   }
                 }
               }
             },
             "responses": {
-              "200": {
-                "description": "User updated successfully",
+              "201": {
+                "description": "Post updated successfully",
                 "content": {
                   "application/json": {
                     "schema": {
-                      "$ref": "#/components/schemas/User"
+                      "$ref": "#/components/schemas/Post"
+                    }
+                  }
+                }
+              },
+              "500": {
+                "description": "Internal server error",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "error": {
+                          "type": "string"
+                        }
+                      }
                     }
                   }
                 }
@@ -258,13 +426,53 @@
             }
           },
           "delete": {
-            "tags": [
-                "users"
-              ],
-            "summary": "Delete user by ID",
+              "tags": ["posts"],
+            "summary": "Delete a post by ID",
             "parameters": [
               {
-                "name": "id",
+                "name": "postId",
+                "in": "path",
+                "required": true,
+                "schema": {
+                  "type": "string"
+                }
+              }
+            ],
+            "responses": {
+              "201": {
+                "description": "Post deleted successfully",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/Post"
+                    }
+                  }
+                }
+              },
+              "500": {
+                "description": "Internal server error",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "error": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/profile/{userId}": {
+          "get": {"tags": ["profile"],
+            "summary": "Get profile by User ID",
+            "parameters": [
+              {
+                "name": "userId",
                 "in": "path",
                 "required": true,
                 "schema": {
@@ -274,72 +482,59 @@
             ],
             "responses": {
               "200": {
-                "description": "User deleted successfully",
+                "description": "Profile found",
                 "content": {
                   "application/json": {
                     "schema": {
-                      "$ref": "#/components/schemas/User"
+                      "$ref": "#/components/schemas/UserProfile"
                     }
                   }
                 }
               }
             }
-          }
-        },
-        "/posts": {
-            "get": {
-                "tags": ["posts"],
-                              "summary": "Get all posts",
-              "responses": {
-                "200": {
-                  "description": "List of posts",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "type": "array",
-                        "items": {
-                          "$ref": "#/components/schemas/Post"
-                        }
-                      }
-                    }
+          },
+          "post": {"tags": ["profile"],
+            "summary": "Create a profile for the User",
+            "parameters": [
+              {
+                "name": "userId",
+                "in": "path",
+                "required": true,
+                "schema": {
+                  "type": "string"
+                }
+              }
+            ],
+            "requestBody": {
+              "required": true,
+              "content": {
+                "multipart/form-data": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NewProfile"
                   }
                 }
               }
             },
-            "post": {
-                "tags": ["posts"],
-              "summary": "Create a new post",
-              "requestBody": {
-                "required": true,
+            "responses": {
+              "201": {
+                "description": "Profile created successfully",
                 "content": {
                   "application/json": {
                     "schema": {
-                      "$ref": "#/components/schemas/NewPost"
+                      "$ref": "#/components/schemas/UserProfile"
                     }
                   }
                 }
               },
-              "responses": {
-                "201": {
-                  "description": "Post created successfully",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Post"
-                      }
-                    }
-                  }
-                },
-                "500": {
-                  "description": "Internal server error",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "type": "object",
-                        "properties": {
-                          "error": {
-                            "type": "string"
-                          }
+              "400": {
+                "description": "Bad request",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "error": {
+                          "type": "string"
                         }
                       }
                     }
@@ -348,117 +543,48 @@
               }
             }
           },
-          "/posts/{postId}": {
-            "get": {
-                "tags": ["posts"],
-              "summary": "Get a post by ID",
-              "parameters": [
-                {
-                  "name": "postId",
-                  "in": "path",
-                  "required": true,
-                  "schema": {
-                    "type": "string"
-                  }
+          "put": { "tags": ["profile"],
+            "summary": "Update profile by User ID",
+            "parameters": [
+              {
+                "name": "userId",
+                "in": "path",
+                "required": true,
+                "schema": {
+                  "type": "string"
                 }
-              ],
-              "responses": {
-                "200": {
-                  "description": "Post found",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Post"
-                      }
-                    }
+              }
+            ],
+            "requestBody": {
+              "required": true,
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UpdateProfile"
                   }
                 }
               }
             },
-            "put": { "tags": ["posts"],
-              "summary": "Update a post by ID",
-              "parameters": [
-                {
-                  "name": "postId",
-                  "in": "path",
-                  "required": true,
-                  "schema": {
-                    "type": "string"
-                  }
-                }
-              ],
-              "requestBody": {
-                "required": true,
+            "responses": {
+              "200": {
+                "description": "Profile updated successfully",
                 "content": {
                   "application/json": {
                     "schema": {
-                      "$ref": "#/components/schemas/UpdatePost"
+                      "$ref": "#/components/schemas/UserProfile"
                     }
                   }
                 }
               },
-              "responses": {
-                "201": {
-                  "description": "Post updated successfully",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Post"
-                      }
-                    }
-                  }
-                },
-                "500": {
-                  "description": "Internal server error",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "type": "object",
-                        "properties": {
-                          "error": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "delete": {
-                "tags": ["posts"],
-              "summary": "Delete a post by ID",
-              "parameters": [
-                {
-                  "name": "postId",
-                  "in": "path",
-                  "required": true,
-                  "schema": {
-                    "type": "string"
-                  }
-                }
-              ],
-              "responses": {
-                "201": {
-                  "description": "Post deleted successfully",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Post"
-                      }
-                    }
-                  }
-                },
-                "500": {
-                  "description": "Internal server error",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "type": "object",
-                        "properties": {
-                          "error": {
-                            "type": "string"
-                          }
+              "400": {
+                "description": "Bad request",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "error": {
+                          "type": "string"
                         }
                       }
                     }
@@ -467,166 +593,39 @@
               }
             }
           },
-          "/profile/{userId}": {
-            "get": {"tags": ["profile"],
-              "summary": "Get profile by User ID",
-              "parameters": [
-                {
-                  "name": "userId",
-                  "in": "path",
-                  "required": true,
-                  "schema": {
-                    "type": "string"
-                  }
-                }
-              ],
-              "responses": {
-                "200": {
-                  "description": "Profile found",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/UserProfile"
-                      }
-                    }
-                  }
+          "delete": {
+              "tags": ["profile"],
+            "summary": "Delete profile by User ID",
+            "parameters": [
+              {
+                "name": "userId",
+                "in": "path",
+                "required": true,
+                "schema": {
+                  "type": "string"
                 }
               }
-            },
-            "post": {"tags": ["profile"],
-              "summary": "Create a profile for the User",
-              "parameters": [
-                {
-                  "name": "userId",
-                  "in": "path",
-                  "required": true,
-                  "schema": {
-                    "type": "string"
-                  }
-                }
-              ],
-              "requestBody": {
-                "required": true,
-                "content": {
-                  "multipart/form-data": {
-                    "schema": {
-                      "$ref": "#/components/schemas/NewProfile"
-                    }
-                  }
-                }
-              },
-              "responses": {
-                "201": {
-                  "description": "Profile created successfully",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/UserProfile"
-                      }
-                    }
-                  }
-                },
-                "400": {
-                  "description": "Bad request",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "type": "object",
-                        "properties": {
-                          "error": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "put": { "tags": ["profile"],
-              "summary": "Update profile by User ID",
-              "parameters": [
-                {
-                  "name": "userId",
-                  "in": "path",
-                  "required": true,
-                  "schema": {
-                    "type": "string"
-                  }
-                }
-              ],
-              "requestBody": {
-                "required": true,
+            ],
+            "responses": {
+              "200": {
+                "description": "Profile deleted successfully",
                 "content": {
                   "application/json": {
                     "schema": {
-                      "$ref": "#/components/schemas/UpdateProfile"
+                      "$ref": "#/components/schemas/UserProfile"
                     }
                   }
                 }
               },
-              "responses": {
-                "200": {
-                  "description": "Profile updated successfully",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/UserProfile"
-                      }
-                    }
-                  }
-                },
-                "400": {
-                  "description": "Bad request",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "type": "object",
-                        "properties": {
-                          "error": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "delete": {
-                "tags": ["profile"],
-              "summary": "Delete profile by User ID",
-              "parameters": [
-                {
-                  "name": "userId",
-                  "in": "path",
-                  "required": true,
-                  "schema": {
-                    "type": "string"
-                  }
-                }
-              ],
-              "responses": {
-                "200": {
-                  "description": "Profile deleted successfully",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/UserProfile"
-                      }
-                    }
-                  }
-                },
-                "400": {
-                  "description": "Bad request",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "type": "object",
-                        "properties": {
-                          "error": {
-                            "type": "string"
-                          }
+              "400": {
+                "description": "Bad request",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "error": {
+                          "type": "string"
                         }
                       }
                     }
@@ -635,97 +634,98 @@
               }
             }
           }
-    },
-    "components": {
-        "schemas": {
-            "UserInput": {
+        }
+  },
+  "components": {
+      "schemas": {
+          "UserInput": {
+            "type": "object",
+            "properties": {
+              "email": {
+                "type": "string",
+                "format": "email"
+              },
+              "name": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              }
+            },
+            "required": ["email", "name", "password"]
+          },
+          "User": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string",
+                "format": "email"
+              },
+              "name": {
+                "type": "string"
+              }
+            },
+            "required": ["id", "email", "name"]
+          },
+          "NewPost": {
               "type": "object",
               "properties": {
-                "email": {
-                  "type": "string",
-                  "format": "email"
+                "details": {
+                  "type": "string"
                 },
                 "name": {
                   "type": "string"
                 },
-                "password": {
+                "location": {
+                  "type": "string"
+                },
+                "amount": {
+                  "type": "integer"
+                },
+                "blood_group": {
+                  "type": "string"
+                },
+                "number": {
                   "type": "string"
                 }
-              },
-              "required": ["email", "name", "password"]
+              }
             },
-            "User": {
+            "Post": {
               "type": "object",
               "properties": {
                 "id": {
                   "type": "string"
                 },
-                "email": {
-                  "type": "string",
-                  "format": "email"
-                },
                 "name": {
                   "type": "string"
-                }
-              },
-              "required": ["id", "email", "name"]
-            },
-            "NewPost": {
-                "type": "object",
-                "properties": {
-                  "details": {
-                    "type": "string"
-                  },
-                  "name": {
-                    "type": "string"
-                  },
-                  "location": {
-                    "type": "string"
-                  },
-                  "amount": {
-                    "type": "integer"
-                  },
-                  "blood_group": {
-                    "type": "string"
-                  },
-                  "number": {
-                    "type": "string"
-                  }
-                }
-              },
-              "Post": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "string"
-                  },
-                  "name": {
-                    "type": "string"
-                  },
-                  "amount": {
-                    "type": "integer"
-                  },
-                  "number": {
-                    "type": "string"
-                  },
-                  "details": {
-                    "type": "string"
-                  },
-                  "location": {
-                    "type": "string"
-                  },
-                  "blood_group": {
-                    "type": "string"
-                  },
-                  "user": {
-                    "$ref": "#/components/schemas/User"
-                  }
+                },
+                "amount": {
+                  "type": "integer"
+                },
+                "number": {
+                  "type": "string"
+                },
+                "details": {
+                  "type": "string"
+                },
+                "location": {
+                  "type": "string"
+                },
+                "blood_group": {
+                  "type": "string"
+                },
+                "user": {
+                  "$ref": "#/components/schemas/User"
                 }
               }
-                   
             }
-            
-      }
-    
+                 
+          }
+          
+    }
+  
 }
- 
+

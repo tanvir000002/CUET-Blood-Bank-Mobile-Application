@@ -5,7 +5,6 @@ const PORT = process.env.PORT || 3000;
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const userRouter = require("./routes/userRoutes");
-const profileRouter = require("./routes/profileRoutes");
 const postRouter = require("./routes/postRoutes");
 const cookieParser = require("cookie-parser");
 
@@ -18,12 +17,9 @@ app.use(express.static("public"));
 app.use(cookieParser());
 
 app.use(userRouter);
-app.use(profileRouter);
 app.use(postRouter);
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });
-
-

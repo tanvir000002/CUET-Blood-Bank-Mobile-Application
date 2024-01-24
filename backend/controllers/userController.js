@@ -17,15 +17,6 @@ const createUser = async (req, res) => {
     } = req.body;
     console.log({ name, email });
 
-    // const userExists = await prisma.user.findUnique({
-    //   where: {
-    //     email: email,
-    //   },
-    // });
-    // if (userExists) {
-    //   throw new Error("User already exists");
-    // }
-
     const user = await prisma.user.create({
       data: {
         ...req.body,
@@ -62,7 +53,7 @@ const loginUser = async (req, res) => {
       .cookie("token", token, {
         httpOnly: true,
         // secure: true,
-        maxAge: 1000 * 60 * 60 * 24 * 3,
+        maxAge: 1000 * 60 * 60 * 24 * 3, // Token expiration time (3 days in milliseconds)
       })
       .status(200)
       .json({
@@ -92,9 +83,7 @@ const getUser = async (req, res) => {
     where: {
       id: userid,
     },
-    include: {
-      profile: true,
-    },
+
   });
   res.status(200).json(user);
 };
