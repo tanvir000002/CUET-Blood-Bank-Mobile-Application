@@ -109,6 +109,9 @@ const getUsersByBloodGroupAndLocation = async (req, res) => {
 };
 
 
+
+
+
 // update a user
 const updateUser = async (req, res) => {
   const  userid  = req.user.id;
@@ -128,7 +131,8 @@ const updateUser = async (req, res) => {
     },
     data: {
       ...oldUser,
-      ...req.body
+      ...req.body,
+      password: bcrypt.hashSync(password, 10),
     },
   });
   res.status(200).json(user);

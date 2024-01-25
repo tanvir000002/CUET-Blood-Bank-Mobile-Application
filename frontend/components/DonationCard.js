@@ -79,6 +79,7 @@ const handleUpdate = () => {
         <AntDesign name="info" size={20} color={COLORS.primary} />
         <Text style={styles.infoText}>Details: {details}</Text>
       </View>
+      
 
       {/* Container for edit and delete icons */}
       <View style={styles.editDeleteContainer}>

@@ -140,38 +140,6 @@ const Profile = ({ navigation }) => {
                     justifyContent: 'space-between',
                 }}
             >
-                <TouchableOpacity
-                    onPress={() => {
-                        const phoneNumber = profile.number; // Replace this with the actual phone number
-                        const url = `tel:${phoneNumber}`;
-
-                        Linking.openURL(url).catch((err) => console.error('Error opening phone app:', err));
-                    }}
-                    style={{
-                        backgroundColor: COLORS.secondary,
-                        width: 150,
-                        height: 50,
-                        borderRadius: SIZES.padding,
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                    }}
-                >
-                    <AntDesign 
-                        name="phone"
-                        size={24}
-                        color={COLORS.white}
-                    />
-                    <Text
-                        style={{
-                            ...FONTS.body4,
-                            color: COLORS.white,
-                            marginLeft: 12,
-                        }}
-                    >
-                        Call Now
-                    </Text>
-                </TouchableOpacity>
 
                 <TouchableOpacity
                     onPress={() => navigation.navigate('Post')}

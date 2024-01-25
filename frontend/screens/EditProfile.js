@@ -37,7 +37,7 @@ const EditProfile = ({ navigation }) => {
                 number: formState.inputValues.phoneNumber,
                 location: formState.inputValues.location,
                 blood_group: formState.inputValues.bloodType,
-                password: formState.inputValues.password,
+                available: Boolean(formState.inputValues.available),
             })
             .then(({ data }) => {
                 navigation.navigate('Profile')
@@ -118,7 +118,7 @@ const EditProfile = ({ navigation }) => {
                                 placeholder="Want to change Email?"
                                 keyboardType="email-address"
                             />
-                            <Input
+                            {/* <Input
                                 icon="lock"
                                 iconPack={FontAwesome}
                                 id="New password"
@@ -129,7 +129,7 @@ const EditProfile = ({ navigation }) => {
                                 autoCapitalize="none"
                                 placeholder="Password"
                                 secureTextEntry
-                            />
+                            /> */}
                             <Input
                                 icon="phone"
                                 iconPack={FontAwesome}
@@ -151,7 +151,16 @@ const EditProfile = ({ navigation }) => {
                                 }
                                 placeholder="Blood Type"
                             />
-
+                            <Input
+                                icon="location-on"
+                                iconPack={MaterialIcons}
+                                id="available"
+                                onInputChanged={inputChangedHandler}
+                                errorText={
+                                    formState.inputValidities['available']
+                                }
+                                placeholder="Available for donate?"
+                            />
                             <Input
                                 icon="location-on"
                                 iconPack={MaterialIcons}

@@ -195,7 +195,7 @@ const Search = ({ navigation }) => {
                             {item.location}
                         </Text>
                     </View>
-
+                   
                     <View
                         style={{
                             flexDirection: 'row',
@@ -213,7 +213,7 @@ const Search = ({ navigation }) => {
                                 marginLeft: 8,
                             }}
                         >
-                            {item.number}
+                             {item.available? "Available for donate": "Not Available for donate"}
                         </Text>
                     </View>
                 </View>

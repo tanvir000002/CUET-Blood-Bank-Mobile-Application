@@ -18,7 +18,6 @@ const initialState = {
     },
     formIsValid: false,
 }
-
 const Register = ({ navigation }) => {
     const [formState, dispatchFormState] = useReducer(reducer, initialState)
 
@@ -38,6 +37,7 @@ const Register = ({ navigation }) => {
                 location: formState.inputValues.location,
                 blood_group: formState.inputValues.bloodType,
                 password: formState.inputValues.password,
+                available: Boolean(formState.inputValues.available),
             })
             .then(({ data }) => {
                 navigation.navigate('Login')
@@ -143,6 +143,17 @@ const Register = ({ navigation }) => {
                                     formState.inputValidities['bloodType']
                                 }
                                 placeholder="Blood Type"
+                            />
+                            
+                            <Input
+                                icon="location-on"
+                                iconPack={MaterialIcons}
+                                id="available"
+                                onInputChanged={inputChangedHandler}
+                                errorText={
+                                    formState.inputValidities['available']
+                                }
+                                placeholder="Available for donate?"
                             />
 
                             <Input

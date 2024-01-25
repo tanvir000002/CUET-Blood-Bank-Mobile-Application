@@ -8,6 +8,7 @@ import Input from '../components/Input'
 import Button from '../components/Button'
 import { reducer } from '../utils/reducers/formReducers'
 import { validateInput } from '../utils/actions/formActions'
+import { axiosInstance } from '../config/axios'
 
 const initialState = {
     inputValidities: {
@@ -23,10 +24,22 @@ const ResetPassword = ({ navigation }) => {
     const inputChangedHandler = useCallback(
         (inputId, inputValue) => {
             const result = validateInput(inputId, inputValue)
-            dispatchFormState({ inputId, validationResult: result })
+            dispatchFormState({ inputId, inputValue, validationResult: result })
         },
         [dispatchFormState]
     )
+
+    const handleSubmit = () => {
+        axiosInstance
+            .put('/users/reset-password', {
+                email: formState.inputValues.email,
+                password: formState.inputValues.password,
+            })
+            .then(({ data }) => {
+                navigation.navigate('Profile')
+            })
+            .catch((error) => alert(error.message))
+    }
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -102,15 +115,15 @@ const ResetPassword = ({ navigation }) => {
                         email */}
                     </Text>
                     <Button
-                        title="SEND"
+                        title="Reset Password"
                         filled
-                        onPress={() => navigation.navigate('SuccessVerification')}
+                        onPress={() => handleSubmit()}
                         style={{
                             width: '100%',
                         }}
                     />
 
-                    <TouchableOpacity
+                    {/* <TouchableOpacity
                         onPress={() => navigation.navigate('Login')}
                     >
                         <Text
@@ -122,7 +135,7 @@ const ResetPassword = ({ navigation }) => {
                         >
                             Remember Password
                         </Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                 </View>
             </PageContainer>
         </SafeAreaView>
