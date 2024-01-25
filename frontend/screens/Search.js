@@ -142,6 +142,10 @@ const Search = ({ navigation }) => {
     }
     
     const renderItem = ({ item, index }) => {
+        // const handleLocationPress = () => {
+        //     // Use Linking.openURL to open the default map application with the donor's location
+        //     Linking.openURL(`https://www.google.com/maps/search/?api=1&query=${item.location}`);
+        //   };
         return (
             <TouchableOpacity
                 onPress={() => setModalVisible(true,item)}
@@ -185,16 +189,16 @@ const Search = ({ navigation }) => {
                             size={26}
                             color={COLORS.primary}
                         />
-                        <Text
-                            style={{
-                                ...FONTS.body4,
-                                marginLeft: 8,
-                                
-                            }}
-                        >
-                            {item.location}
-                        </Text>
+                        <TouchableOpacity style={styles0.button}
+                    onPress={() => {
+                        Linking.openURL(`https://www.google.com/maps/search/?api=1&query=${item.location}`);
+                    }}
+                    
+                >
+                    <Text style={styles0.text}>{item.location}</Text>
+                </TouchableOpacity>
                     </View>
+
                     <View>
                 <TouchableOpacity
                     onPress={() => {
@@ -278,6 +282,7 @@ const Search = ({ navigation }) => {
     // change this for accurate view on the click
     function renderDonorsDetails(donors) {
         return (
+            
             <Modal
                 animationType="slide"
                 transparent={true}
@@ -325,6 +330,11 @@ const Search = ({ navigation }) => {
                                         size={24}
                                         color={COLORS.primary}
                                     />
+                                    {/* const handleLocationPress = () => {
+    // Use Linking.openURL to open the default map application with the donor's location
+    Linking.openURL(`https://www.google.com/maps/search/?api=1&query=${donors.location}`);
+  }; */}
+                                    <TouchableOpacity onPress={Linking.openURL(`https://www.google.com/maps/search/?api=1&query=${donors.location}`)}>
                                     <Text
                                         style={{
                                             ...FONTS.body4,
@@ -333,9 +343,11 @@ const Search = ({ navigation }) => {
                                     >
                                         {donors.location}
                                     </Text>
+                                     </TouchableOpacity>
                                 </View>
                             </View>
 
+       
                             <View
                                 style={{
                                     justifyContent: 'space-between',
@@ -528,6 +540,18 @@ const Search = ({ navigation }) => {
         </SafeAreaView>
     )
 }
+const styles0 = StyleSheet.create({
+    button: {
+      padding: 10,
+      backgroundColor: '#3498db',
+      borderRadius: 5,
+    },
+    text: {
+      color: '#fff',
+      fontSize: 16,
+    },
+  });
+  
 
 const styles = StyleSheet.create({
     cardContainer: {
