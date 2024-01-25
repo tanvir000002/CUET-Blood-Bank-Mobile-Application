@@ -1,6 +1,6 @@
 const prisma = require("../common/prisma");
 const cloudinary = require("../services/cloudinary");
-
+//const { COLORS, SIZES, FONTS } = require('../frontend/constants');
 const getAllPosts = async (req, res) => {
   try {
     const posts = await prisma.post.findMany({
@@ -14,18 +14,44 @@ const getAllPosts = async (req, res) => {
   }
 };
 
+//update post 
+// const updatePost = async (req, res) => {
+//   const  postid  = req.post.id;
+//   const { name, number, blood_group, location, amount,details } =
+//     req.body;
+
+//     const oldPost = await prisma.post.findUnique({
+//       where: {
+//         id: postid,
+//       },
+//     });
+
+
+//   const post = await prisma.post.update({
+//     where: {
+//       id: postid,
+//     },
+//     data: {
+//       ...oldPost,
+//       ...req.body
+//     },
+//   });
+//   res.status(200).json(post);
+// };
+
+
+
+
+
 
 const updatePost = async (req, res) => {
   const { postId } = req.params;
+ 
     const oldPost = await prisma.post.findUnique({
       where: {
         id: postId,
       },
     });
-
-    if (oldPost.userId !== req.user.id) {
-      return res.status(403).json({ error: "Permission denied. You are not the owner of this post." });
-    }
     
   try {
     const post = await prisma.post.update({
@@ -73,8 +99,9 @@ const createPost = async (req, res) => {
       details,
       notification,
     } = req.body;
-    console.log({ name, number, blood_group, amount });
-      let notificationText = `${name} urgently requires ${amount} bag(s) of ${blood_group} blood at ${location}.`;
+    console.log({blood_group,location });
+    let notificationText = `Hey! Someone urgently needs ${blood_group} blood at ${location}.`;
+    //const notificationText = `<span style="font-family: ${FONTS.h3.fontFamily}; font-size: ${FONTS.h3.fontSize}px; line-height: ${FONTS.h3.lineHeight}px; color: #333;">${name} needs ${amount} bag of ${blood_group} group blood urgently at ${location}.</span>`;
       const post = await prisma.post.create({
       data: {
         name,

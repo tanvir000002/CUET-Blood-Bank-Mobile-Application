@@ -38,6 +38,7 @@ const Post = ({ navigation }) => {
                 blood_group: formState.inputValues.bloodType,
                 amount: formState.inputValues.bloodBag,
                 details: formState.inputValues.whyNeeded,
+                userId: "b7f5f67e-b6eb-467b-8b3d-1a147bac74af",
             })
             .then(({ data }) => {
                 navigation.navigate('Home')

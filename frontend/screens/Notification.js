@@ -6,7 +6,11 @@ import { images, COLORS, FONTS, SIZES } from '../constants';
 import { MaterialIcons } from '@expo/vector-icons'
 import { axiosInstance } from '../config/axios'; 
 import  { useEffect, useState } from 'react'
+import moment from 'moment';
 
+import { Entypo } from '@expo/vector-icons';
+import { calculateTimeAgo } from '../utils/shared/calculateTime';
+//import LinearGradient from 'react-native-linear-gradient';
 
 const Notification = ({ navigation }) => {
     function renderHeader() {
@@ -16,8 +20,6 @@ const Notification = ({ navigation }) => {
                     flexDirection: 'row',
                     justifyContent: 'space-between',
                     alignItems: 'center',
-                    marginBottom: 12,
-                    borderBottomColor: COLORS.secondaryWhite, 
                 }}
             >
                 <TouchableOpacity
@@ -25,7 +27,7 @@ const Notification = ({ navigation }) => {
                     style={{
                         height: 44,
                         width: 44,
-                        borderRadius: 4,
+                        borderRadius: 8,
                         backgroundColor: COLORS.secondaryWhite,
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -42,7 +44,6 @@ const Notification = ({ navigation }) => {
         )
     }
 
-
   const [notifications, setPosts] = useState([]);
 
   useEffect(() => {
@@ -50,41 +51,59 @@ const Notification = ({ navigation }) => {
     axiosInstance
       .get('/posts')
       .then(({ data }) => {
-        setPosts(data);
+        const sorteddata = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        setPosts(sorteddata);
       })
       .catch((error) => console.error("Error fetching posts:", error));
   }, [notifications]);
-  // console.log('notification data:', notifications);
+  console.log('notification data:', notifications);
+
+
+
 
   // Render a single notification item
   const renderNotificationItem = ({ item }) => {
+    const backgroundColor = '#E6F7FF';
+    const formattedTime = calculateTimeAgo(item.createdAt);
     return (
         
       <TouchableOpacity
-      onPress={() => navigation.navigate('NotificationPost',{ id: item.id })}
+      onPress={() => navigation.navigate('Home')}
         style={{
           flexDirection: 'row',
           alignItems: 'center',
-          paddingVertical: 15,
-          borderBottomWidth: 1,
-          marginVertical: 5,
-          borderBottomColor: COLORS.secondaryBlack,
+          paddingVertical: 12,
+        //  borderBottomWidth: 1,
+         // borderBottomColor: COLORS.lightGray,
+          backgroundColor,
+          marginBottom: 2,
+          borderRadius: 10,
+          shadowColor: '#000',
+          shadowOffset: {
+            width: 0,
+            height: 2,
+          },
+          shadowOpacity: 0.25,
+          shadowRadius: 3.84,
+          elevation: 10, 
+          zIndex: 1,
         }}
       >
         {/* Add an icon or image for the notification */}
+        
         <Image
           source={images.Notification} // Replace with your notification icon or image
           style={{
             width: 40,
             height: 40,
             borderRadius: 20,
-            marginRight: 10,
+            marginRight: -20,
           }}
-          
         />
+        <Entypo name="check" size={24} color={COLORS.secondaryGray} />
         <View style={{ flex: 1 }}>
-          <Text style={{ ...FONTS.h3 }}>{item.notification}</Text>
-          <Text style={{ ...FONTS.body4, color: COLORS.secondary }}>{item.createdAt}</Text>
+          <Text style={{ ...FONTS.h4,color: COLORS.secondaryBlack}}>{item.notification}</Text>
+          <Text style={{ ...FONTS.body4, color: COLORS.black }}>{formattedTime}</Text>
 
         </View>
       </TouchableOpacity>
@@ -92,7 +111,7 @@ const Notification = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white }}>
       <PageContainer>
         {/* Header */}
         <View
@@ -100,11 +119,12 @@ const Notification = ({ navigation }) => {
             flexDirection: 'row',
             justifyContent: 'space-between',
             alignItems: 'center',
-            marginBottom: SIZES.padding * 2,
+            marginBottom: SIZES.padding *2,
+            //paddingHorizontal: SIZES.padding,
           }}
         >
              {renderHeader()}
-          <Text style={{ ...FONTS.h2, } }>Notifications   </Text>
+          <Text style={{ ...FONTS.h2, color:COLORS.black }}>Notifications</Text>
           {/* Add a button or icon for clearing notifications or navigating back */}
         </View>
 
@@ -113,6 +133,7 @@ const Notification = ({ navigation }) => {
           data={notifications}
           keyExtractor={(item) => item.id.toString()}
           renderItem={renderNotificationItem}
+          contentContainerStyle={{ paddingBottom: SIZES.padding }}
         />
       </PageContainer>
     </SafeAreaView>
