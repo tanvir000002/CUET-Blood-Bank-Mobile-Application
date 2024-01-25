@@ -37,7 +37,7 @@ const EditProfile = ({ navigation }) => {
                 number: formState.inputValues.phoneNumber,
                 location: formState.inputValues.location,
                 blood_group: formState.inputValues.bloodType,
-                available: Boolean(formState.inputValues.available),
+                available: formState.inputValues.available,
             })
             .then(({ data }) => {
                 navigation.navigate('Profile')
@@ -159,7 +159,7 @@ const EditProfile = ({ navigation }) => {
                                 errorText={
                                     formState.inputValidities['available']
                                 }
-                                placeholder="Available for donate?"
+                                placeholder="Availability"
                             />
                             <Input
                                 icon="location-on"

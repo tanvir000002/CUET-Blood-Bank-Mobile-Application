@@ -18,7 +18,7 @@ model User {
   number      String
   blood_group String
   location    String
-  available   Boolean   @default(true)
+  available   String  
   role        Role?     @default(USER)
   posts       Post[]
   createdAt   DateTime  @default(now())

@@ -5,11 +5,13 @@ import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Button from '../components/Button'
 import Input from '../components/Input'
+import SelectInput from '../components/SelectInput'
 import PageContainer from '../components/PageContainer'
 import { COLORS, FONTS, images } from '../constants'
 import { validateInput } from '../utils/actions/formActions'
 import { reducer } from '../utils/reducers/formReducers'
 import { axiosInstance } from '../config/axios'
+import { useState } from 'react';
 
 const initialState = {
     inputValidities: {
@@ -20,6 +22,8 @@ const initialState = {
 }
 const Register = ({ navigation }) => {
     const [formState, dispatchFormState] = useReducer(reducer, initialState)
+    
+    
 
     const inputChangedHandler = useCallback(
         (inputId, inputValue) => {
@@ -37,7 +41,7 @@ const Register = ({ navigation }) => {
                 location: formState.inputValues.location,
                 blood_group: formState.inputValues.bloodType,
                 password: formState.inputValues.password,
-                available: Boolean(formState.inputValues.available),
+                available: formState.inputValues.available,
             })
             .then(({ data }) => {
                 navigation.navigate('Login')
@@ -153,8 +157,9 @@ const Register = ({ navigation }) => {
                                 errorText={
                                     formState.inputValidities['available']
                                 }
-                                placeholder="Available for donate?"
+                                placeholder="Availability"
                             />
+                            
 
                             <Input
                                 icon="location-on"

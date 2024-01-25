@@ -212,7 +212,8 @@ const Profile = ({ navigation }) => {
                             marginLeft: 24,
                         }}
                     >
-                        {profile.available? "Available for donate": "Not Available for donate"}
+                        <Text style={{ ...FONTS.body3 }}>Availability: </Text>
+                        {profile.available}
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity

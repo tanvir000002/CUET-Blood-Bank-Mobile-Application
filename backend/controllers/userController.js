@@ -108,12 +108,7 @@ const getUsersByBloodGroupAndLocation = async (req, res) => {
   res.status(200).json(users);
 };
 
-
-
-
-
-// update a user
-const updateUser = async (req, res) => {
+const updateUserPass = async (req, res) => {
   const  userid  = req.user.id;
   const { name, email, password, number, blood_group, location, available } =
     req.body;
@@ -138,6 +133,34 @@ const updateUser = async (req, res) => {
   res.status(200).json(user);
 };
 
+
+
+// update a user
+const updateUser = async (req, res) => {
+  const  userid  = req.user.id;
+  const { name, email, password, number, blood_group, location, available } =
+    req.body;
+
+    const oldUser = await prisma.user.findUnique({
+      where: {
+        id: userid,
+      },
+    });
+
+
+  const user = await prisma.user.update({
+    where: {
+      id: userid,
+    },
+    data: {
+      ...oldUser,
+      ...req.body,
+      //password: bcrypt.hashSync(password, 10),
+    },
+  });
+  res.status(200).json(user);
+};
+
 // delete a user
 const deleteUser = async (req, res) => {
   const { id } = req.params;
@@ -155,6 +178,7 @@ module.exports = {
   getAllUsers,
   getUser,
   updateUser,
+  updateUserPass,
   deleteUser,
   loginUser,
   logoutUser,

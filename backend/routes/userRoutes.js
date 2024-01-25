@@ -3,6 +3,7 @@ const {
   getAllUsers,
   getUser,
   createUser,
+  updateUserPass,
   updateUser,
   deleteUser,
   loginUser,
@@ -27,7 +28,7 @@ router.get("/users/bloodloc",  getUsersByBloodGroupAndLocation);
 
 router.get("/users/profile", authMiddleware, verifyUser, getUser);
 router.put("/users/edit-profile", authMiddleware, verifyUser, updateUser);
-router.put("/users/reset-password", authMiddleware, verifyUser, updateUser);
+router.put("/users/reset-password", authMiddleware, verifyUser, updateUserPass);
 router.delete("/users/:id", authMiddleware, deleteUser);
 
 module.exports = router;

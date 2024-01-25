@@ -149,7 +149,7 @@ const Search = ({ navigation }) => {
                 style={{
                     flexDirection: 'row',
                     alignItems: 'center',
-                    height: 110,
+                    height: 250,
                     borderColor: COLORS.secondaryGray,
                     borderWidth: 0.5,
                     marginVertical: 2,
@@ -168,7 +168,7 @@ const Search = ({ navigation }) => {
                             ...FONTS.body4,
                             fontWeight: 'bold',
                             marginLeft: 4,
-                            marginBottom: 6,
+                            marginBottom: 2,
                         }}
                     >
                         {item.name}
@@ -176,7 +176,7 @@ const Search = ({ navigation }) => {
                     <View
                         style={{
                             flexDirection: 'row',
-                            marginVertical: 12,
+                            marginVertical: 2,
                             justifyContent: 'center',
                         }}
                     >
@@ -195,7 +195,18 @@ const Search = ({ navigation }) => {
                             {item.location}
                         </Text>
                     </View>
-                   
+                    <View>
+                <TouchableOpacity
+                    onPress={() => {
+                        const url = `tel:${item.number}`;
+                        Linking.openURL(url).catch((err) => console.error('Error opening phone app:', err));
+                    }}
+                    style={styles.callNowButton}
+                >
+                    <AntDesign name="phone" size={24} color={COLORS.white} />
+                    <Text style={styles.callNowButtonText}>Call Now</Text>
+                </TouchableOpacity>
+                </View>
                     <View
                         style={{
                             flexDirection: 'row',
@@ -210,10 +221,11 @@ const Search = ({ navigation }) => {
                         <Text
                             style={{
                                 ...FONTS.body4,
-                                marginLeft: 8,
+                                marginLeft: 2,
                             }}
                         >
-                             {item.available? "Available for donate": "Not Available for donate"}
+                            <Text style={{ ...FONTS.body3 }}>Availability: </Text>
+                             {item.available}
                         </Text>
                     </View>
                 </View>
@@ -242,18 +254,7 @@ const Search = ({ navigation }) => {
                         {item.blood_group}
                     </Text>
                 </View>
-                <View>
-                <TouchableOpacity
-                    onPress={() => {
-                        const url = `tel:${item.number}`;
-                        Linking.openURL(url).catch((err) => console.error('Error opening phone app:', err));
-                    }}
-                    style={styles.callNowButton}
-                >
-                    <AntDesign name="phone" size={24} color={COLORS.white} />
-                    <Text style={styles.callNowButtonText}>Call Now</Text>
-                </TouchableOpacity>
-                </View>
+                
             </TouchableOpacity>
         )
     }
