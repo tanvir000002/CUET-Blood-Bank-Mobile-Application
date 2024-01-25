@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { MaterialCommunityIcons, Ionicons, AntDesign, FontAwesome } from '@expo/vector-icons'
+import { MaterialIcons, Ionicons, AntDesign, FontAwesome } from '@expo/vector-icons'
 import { COLORS, SIZES, FONTS } from '../constants'
 import Slideshow from 'react-native-image-slider-show'
 import { categories } from '../constants/data'
@@ -40,7 +40,36 @@ const NotificationPost =  ({ navigation,route }) => {
         return () => clearInterval(toggle)
     })
 
-
+    function renderHeader() {
+      return (
+          <View
+              style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+              }}
+          >
+              <TouchableOpacity
+                  onPress={() => navigation.navigate('Home')}
+                  style={{
+                      height: 44,
+                      width: 44,
+                      borderRadius: 8,
+                      backgroundColor: COLORS.secondaryWhite,
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                  }}
+              >
+                  <MaterialIcons
+                      name="keyboard-arrow-left"
+                      size={28}
+                      color={COLORS.black}
+                  />
+              </TouchableOpacity>
+              
+          </View>
+      )
+  }
     function renderDonationCard() {
         return (
           // <ScrollView>
@@ -67,6 +96,7 @@ const NotificationPost =  ({ navigation,route }) => {
       return (
         <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
              <ScrollView>
+             {renderHeader()}
           <View style={{ marginHorizontal: 22 }}>
             {renderDonationCard()}
           </View>

@@ -10,7 +10,7 @@ CREATE TABLE "User" (
     "number" TEXT NOT NULL,
     "blood_group" TEXT NOT NULL,
     "location" TEXT NOT NULL,
-    "available" BOOLEAN NOT NULL DEFAULT true,
+    "available" TEXT NOT NULL,
     "role" "Role" DEFAULT 'USER',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,

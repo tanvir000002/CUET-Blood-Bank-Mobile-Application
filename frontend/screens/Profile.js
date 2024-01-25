@@ -137,7 +137,9 @@ const Profile = ({ navigation }) => {
             <View
                 style={{
                     flexDirection: 'row',
-                    justifyContent: 'space-between',
+                    justifyContent: 'center',
+                    marginVertical: 14,
+
                 }}
             >
 

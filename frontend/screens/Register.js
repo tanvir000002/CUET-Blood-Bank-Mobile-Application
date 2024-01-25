@@ -150,7 +150,7 @@ const Register = ({ navigation }) => {
                             />
                             
                             <Input
-                                icon="location-on"
+                                icon="event-available"
                                 iconPack={MaterialIcons}
                                 id="available"
                                 onInputChanged={inputChangedHandler}

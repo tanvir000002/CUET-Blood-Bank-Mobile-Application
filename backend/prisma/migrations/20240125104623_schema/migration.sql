@@ -1,3 +1,0 @@
--- AlterTable
-ALTER TABLE "User" ALTER COLUMN "available" DROP DEFAULT,
-ALTER COLUMN "available" SET DATA TYPE TEXT;
