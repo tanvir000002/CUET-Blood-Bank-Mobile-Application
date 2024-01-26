@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { MaterialIcons, Ionicons, AntDesign, FontAwesome } from '@expo/vector-icons'
+import { MaterialIcons, Ionicons, AntDesign, FontAwesome, SimpleLineIcons } from '@expo/vector-icons'
 import { COLORS, SIZES, FONTS } from '../constants'
 import Slideshow from 'react-native-image-slider-show'
 import { categories } from '../constants/data'
@@ -10,7 +10,8 @@ import { donationRequests } from '../constants/data'
 import axios from 'axios';
 import { axiosInstance } from '../config/axios'
 import Post from './Post'
-// import BottomTabNavigation from '../navigation/BottomTabNavigation'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+// import BottomTabNavigation from '../navigation/BottomTabNavigation
 const NotificationPost =  ({ navigation,route }) => {
     const { id } = route.params;
   // const postId = localStorage.getItem("postId")
@@ -101,7 +102,6 @@ const NotificationPost =  ({ navigation,route }) => {
           <View style={{ marginHorizontal: 22 }}>
             {renderDonationCard()}
           </View>
-          {/* {createBottomTabNavigator()} */}
           </ScrollView>
           {/* <BottomTabNavigation /> */}
         </SafeAreaView>
