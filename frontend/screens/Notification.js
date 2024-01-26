@@ -1,4 +1,4 @@
-import React from 'react';
+/*
 import { View, Text, FlatList, TouchableOpacity, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import PageContainer from '../components/PageContainer';
@@ -9,8 +9,21 @@ import  { useEffect, useState } from 'react'
 import moment from 'moment';
 
 import { Entypo } from '@expo/vector-icons';
+import { calculateTimeAgo } from '../utils/shared/calculateTime';*/
+//import LinearGradient from 'react-native-linear-gradient';/import LinearGradient from 'react-native-linear-gradient';
+import React from 'react';
+import { View, Text, FlatList, TouchableOpacity, Image, Animated } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import PageContainer from '../components/PageContainer';
+import { images, COLORS, FONTS, SIZES } from '../constants';
+import { MaterialIcons,FontAwesome } from '@expo/vector-icons'
+import { axiosInstance } from '../config/axios'; 
+import  { useEffect, useState } from 'react'
+import moment from 'moment';
+
+import { Entypo } from '@expo/vector-icons';
 import { calculateTimeAgo } from '../utils/shared/calculateTime';
-//import LinearGradient from 'react-native-linear-gradient';
+
 
 const Notification = ({ navigation }) => {
     function renderHeader() {
@@ -45,7 +58,7 @@ const Notification = ({ navigation }) => {
     }
 
   const [notifications, setPosts] = useState([]);
-
+  
   useEffect(() => {
     // Fetch posts when the component mounts
     axiosInstance
@@ -55,6 +68,7 @@ const Notification = ({ navigation }) => {
         setPosts(sorteddata);
       })
       .catch((error) => console.error("Error fetching posts:", error));
+      
   }, [notifications]);
   console.log('notification data:', notifications);
 
@@ -63,7 +77,7 @@ const Notification = ({ navigation }) => {
 
   // Render a single notification item
   const renderNotificationItem = ({ item }) => {
-    const backgroundColor = '#E6F7FF';
+    const backgroundColor = '#FFD1DC';
     const formattedTime = calculateTimeAgo(item.createdAt);
     return (
         
@@ -73,20 +87,21 @@ const Notification = ({ navigation }) => {
         style={{
           flexDirection: 'row',
           alignItems: 'center',
+          backgroundColor: '#E6F7FF',
           paddingVertical: 12,
         //  borderBottomWidth: 1,
          // borderBottomColor: COLORS.lightGray,
           backgroundColor,
-          marginBottom: 2,
+          marginBottom: 8,
           borderRadius: 10,
           shadowColor: '#000',
           shadowOffset: {
             width: 0,
             height: 2,
           },
-          shadowOpacity: 0.25,
-          shadowRadius: 3.84,
-          elevation: 10, 
+          shadowOpacity: 0.2,
+          shadowRadius: 3,
+          elevation: 5, 
           zIndex: 1,
         }}
       >
@@ -101,9 +116,9 @@ const Notification = ({ navigation }) => {
             marginRight: -20,
           }}
         />
-        <Entypo name="check" size={24} color={COLORS.secondaryGray} />
-        <View style={{ flex: 1 }}>
-          <Text style={{ ...FONTS.h4,color: COLORS.secondaryBlack}}>{item.notification}</Text>
+      <FontAwesome name="heartbeat" size={28} color={COLORS.red} />
+        <View style={{ flex: 1 ,marginLeft: 10 ,backgroundColor: '#F9F9F9', padding: 10, borderRadius: 8, borderWidth: 1, borderColor: COLORS.red  }}>
+          <Text style={{ ...FONTS.h5,color: COLORS.pink}}>{item.notification}</Text>
           <Text style={{ ...FONTS.body4, color: COLORS.black }}>{formattedTime}</Text>
 
         </View>
@@ -112,7 +127,7 @@ const Notification = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white }}>
+    <SafeAreaView style={{flex: 1, backgroundColor: COLORS.black}}>
       <PageContainer>
         {/* Header */}
         <View
@@ -140,5 +155,4 @@ const Notification = ({ navigation }) => {
     </SafeAreaView>
   );
 };
-
 export default Notification;

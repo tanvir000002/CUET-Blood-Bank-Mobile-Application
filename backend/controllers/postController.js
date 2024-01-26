@@ -99,8 +99,8 @@ const createPost = async (req, res) => {
       details,
       notification,
     } = req.body;
-    console.log({blood_group,location });
-    let notificationText = `Hey! Someone urgently needs ${blood_group} blood at ${location}.`;
+    console.log({name,blood_group,location });
+    let notificationText = `${name} requires urgent blood donation! Your help can save a life. Click for details.`;
     //const notificationText = `<span style="font-family: ${FONTS.h3.fontFamily}; font-size: ${FONTS.h3.fontSize}px; line-height: ${FONTS.h3.lineHeight}px; color: #333;">${name} needs ${amount} bag of ${blood_group} group blood urgently at ${location}.</span>`;
       const post = await prisma.post.create({
       data: {
