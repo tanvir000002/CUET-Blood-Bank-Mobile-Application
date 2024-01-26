@@ -74,11 +74,11 @@ const Notification = ({ navigation }) => {
         style={{
           flexDirection: 'row',
           alignItems: 'center',
-          backgroundColor: '#FFFFFF',
+          // backgroundColor: '#FFFFFF',
           paddingVertical: 12,
         //  borderBottomWidth: 1,
          // borderBottomColor: COLORS.lightGray,
-          // backgroundColor,
+          backgroundColor,
           marginBottom: 8,
           borderRadius: 10,
           shadowColor: '#000',

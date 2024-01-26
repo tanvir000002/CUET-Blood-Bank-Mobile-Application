@@ -69,7 +69,7 @@ const Profile = ({ navigation }) => {
             >
                 <TouchableOpacity
                     // Top left corner on profile "<" 
-                    onPress={() => navigation.navigate('BottomTabNavigation')}
+                    onPress={() => navigation.navigate('Home')}
                     style={{
                         height: 44,
                         width: 44,
