@@ -1,5 +1,5 @@
 import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native'
-import React, { useCallback, useReducer } from 'react'
+import React, { useCallback, useReducer,useEffect,useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import PageContainer from '../components/PageContainer'
 import { FONTS, COLORS, SIZES, images } from '../constants'
@@ -45,7 +45,18 @@ const EditProfile = ({ navigation }) => {
             })
             .catch((error) => alert(error.message))
     }
+    const [profile, setProfile] = useState({});
 
+    useEffect(() => {
+      // Fetch posts when the component mounts
+      axiosInstance
+        .get('/users/profile')
+        .then(({ data }) => {
+        setProfile(data);
+        })
+        .catch((error) => console.error("Error fetching posts:", error));
+    }, []);
+ 
     function renderHeader() {
         return (
             <View
@@ -108,7 +119,7 @@ const EditProfile = ({ navigation }) => {
                                 errorText={
                                     formState.inputValidities['fullName']
                                 }
-                                placeholder="Edit Name"
+                                placeholder={profile.name}
                             />
                             <Input
                                 icon="email"
@@ -116,7 +127,7 @@ const EditProfile = ({ navigation }) => {
                                 id="email"
                                 onInputChanged={inputChangedHandler}
                                 errorText={formState.inputValidities['email']}
-                                placeholder="Want to change Email?"
+                                placeholder={profile.email}
                                 keyboardType="email-address"
                             />
                             <Input
@@ -127,7 +138,7 @@ const EditProfile = ({ navigation }) => {
                                 errorText={
                                     formState.inputValidities['phoneNumber']
                                 }
-                                placeholder="Want to change Phone Number?"
+                                placeholder={profile.number}
                             />
 
                             <Input
@@ -138,17 +149,17 @@ const EditProfile = ({ navigation }) => {
                                 errorText={
                                     formState.inputValidities['bloodType']
                                 }
-                                placeholder="Blood Type"
+                                placeholder={profile.blood_group}
                             />
                             <Input
-                                icon="location-on"
+                                icon="event-available"
                                 iconPack={MaterialIcons}
                                 id="available"
                                 onInputChanged={inputChangedHandler}
                                 errorText={
                                     formState.inputValidities['available']
                                 }
-                                placeholder="Availability"
+                                placeholder={profile.available}
                             />
                             <Input
                                 icon="location-on"
@@ -158,7 +169,7 @@ const EditProfile = ({ navigation }) => {
                                 errorText={
                                     formState.inputValidities['location']
                                 }
-                                placeholder="Want to change location?"
+                                placeholder={profile.location}
                             />
                         </View>
                         <Button

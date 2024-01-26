@@ -1,6 +1,6 @@
 import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native'
 import axios from 'axios'
-import React, { useCallback, useReducer } from 'react'
+import React, { useCallback, useReducer,useState,useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import PageContainer from '../components/PageContainer'
 import { FONTS, COLORS, SIZES, images } from '../constants'
@@ -24,7 +24,7 @@ const EditPost = ({ navigation,route}) => {
     // const postId = localStorage.getItem("postId")
     console.log('navigation',id)
     const [formState, dispatchFormState] = useReducer(reducer, initialState)
-
+    
     const inputChangedHandler = useCallback(
         (inputId, inputValue) => {
             const result = validateInput(inputId, inputValue)
@@ -49,6 +49,22 @@ const EditPost = ({ navigation,route}) => {
             })
             .catch((error) => alert(error.message))
     }
+    const [posts, setPosts] = useState([]);
+
+    useEffect(() => {
+      // Fetch posts when the component mounts
+      axiosInstance
+        .get(`/posts/${id}`)
+        .then(({ data }) => {
+          setPosts(data);
+
+        })
+        .catch((error) => console.error("Error fetching posts:", error));
+    }, [posts]);
+   console.log('post update',posts)
+   console.log('amount',posts.amount);
+   const amountString = posts.amount?.toString() || '';
+  console.log('amomfnbjdnjfnunt', amountString);
     function renderHeader() {
         return (
             <View
@@ -111,7 +127,7 @@ const EditPost = ({ navigation,route}) => {
                                 errorText={
                                     formState.inputValidities['fullName']
                                 }
-                                placeholder="Edit Patient Name"
+                                placeholder={posts.name}
                             />
                            
                             <Input
@@ -122,7 +138,7 @@ const EditPost = ({ navigation,route}) => {
                                 errorText={
                                     formState.inputValidities['phoneNumber']
                                 }
-                                placeholder="Change Phone Number"
+                                placeholder={posts.number}
                             />
 
                             <Input
@@ -133,7 +149,7 @@ const EditPost = ({ navigation,route}) => {
                                 errorText={
                                     formState.inputValidities['bloodType']
                                 }
-                                placeholder="Edit Required Blood Group"
+                                placeholder={posts.blood_group}
                             />
                             <Input
                                 icon="blood"
@@ -143,7 +159,8 @@ const EditPost = ({ navigation,route}) => {
                                 errorText={
                                     formState.inputValidities['bloodBag']
                                 }
-                                placeholder="Edit Amount of Required Blood"
+                                
+                                placeholder={amountString}
                             />
 
                             <Input
@@ -154,7 +171,7 @@ const EditPost = ({ navigation,route}) => {
                                 errorText={
                                     formState.inputValidities['location']
                                 }
-                                placeholder="Change Location"
+                                placeholder={posts.location}
                             />
                             <Input
                                 icon="questioncircleo"
@@ -164,7 +181,7 @@ const EditPost = ({ navigation,route}) => {
                                 errorText={
                                     formState.inputValidities['whyNeeded']
                                 }
-                                placeholder="Why do You need Blood?"
+                                placeholder={posts.details}
                             />
                         </View>
                         <Button
