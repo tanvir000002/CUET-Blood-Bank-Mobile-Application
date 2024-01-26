@@ -61,7 +61,15 @@ const loginUser = async (req, res) => {
         token,
       });
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    let errorMessage = "Invalid Credentials";
+    
+    // Customize the error message based on the specific error condition
+    if (error.message === "User does not exist") {
+      errorMessage = "User does not exist";
+    } else if (error.message === "Invalid password") { // Corrected condition
+      errorMessage = "Invalid password";
+    }
+    res.status(400).json({ error: errorMessage });
   }
 };
 

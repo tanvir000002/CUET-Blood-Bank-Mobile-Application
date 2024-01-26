@@ -1,7 +1,7 @@
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons'
 import axios from 'axios'
-import React, { useCallback, useReducer } from 'react'
-import { Image, Text, TouchableOpacity, View } from 'react-native'
+import React, { useCallback, useReducer ,useState} from 'react'
+import { Alert, Image, Text, TouchableOpacity, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Button from '../components/Button'
 import Input from '../components/Input'
@@ -23,6 +23,7 @@ const initialState = {
 const Login = ({ navigation }) => {
     // useReducer is used to manage the state of the form
     const [formState, dispatchFormState] = useReducer(reducer, initialState)
+   // const [error, setError] = useState(null);
 
     // inputChangedHandler is a callback function to handle changes in input values
     const inputChangedHandler = useCallback(
@@ -42,7 +43,12 @@ const Login = ({ navigation }) => {
                 setAuthToken(data?.token)
                 navigation.navigate('BottomTabNavigation')
             })
-            .catch((err) => alert(err?.message))
+            .catch((error) => {
+            if (error?.response?.data?.error === "Invalid Credentials") {
+                alert("Invalid credintial. Please try again.");
+            }
+        });
+           // .catch((err) => alert(err?.message))
     }
     return (
         <SafeAreaView
