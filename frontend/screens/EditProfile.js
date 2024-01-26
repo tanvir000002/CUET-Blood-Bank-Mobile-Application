@@ -9,6 +9,7 @@ import Button from '../components/Button'
 import { reducer } from '../utils/reducers/formReducers'
 import { validateInput } from '../utils/actions/formActions'
 import { axiosInstance } from '../config/axios'
+import BottomTabNavigation from '../navigation/BottomTabNavigation'
 
 const initialState = {
     inputValidities: {
@@ -118,18 +119,6 @@ const EditProfile = ({ navigation }) => {
                                 placeholder="Want to change Email?"
                                 keyboardType="email-address"
                             />
-                            {/* <Input
-                                icon="lock"
-                                iconPack={FontAwesome}
-                                id="New password"
-                                onInputChanged={inputChangedHandler}
-                                errorText={
-                                    formState.inputValidities['password']
-                                }
-                                autoCapitalize="none"
-                                placeholder="Password"
-                                secureTextEntry
-                            /> */}
                             <Input
                                 icon="phone"
                                 iconPack={FontAwesome}
@@ -184,6 +173,7 @@ const EditProfile = ({ navigation }) => {
                         
                     </View>
                 </ScrollView>
+                {/* <BottomTabNavigation /> */}
             </PageContainer>
         </SafeAreaView>
     )

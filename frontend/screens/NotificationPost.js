@@ -10,7 +10,7 @@ import { donationRequests } from '../constants/data'
 import axios from 'axios';
 import { axiosInstance } from '../config/axios'
 import Post from './Post'
-
+// import BottomTabNavigation from '../navigation/BottomTabNavigation'
 const NotificationPost =  ({ navigation,route }) => {
     const { id } = route.params;
   // const postId = localStorage.getItem("postId")
@@ -39,6 +39,7 @@ const NotificationPost =  ({ navigation,route }) => {
 
         return () => clearInterval(toggle)
     })
+
 
     function renderHeader() {
       return (
@@ -100,7 +101,9 @@ const NotificationPost =  ({ navigation,route }) => {
           <View style={{ marginHorizontal: 22 }}>
             {renderDonationCard()}
           </View>
+          {/* {createBottomTabNavigator()} */}
           </ScrollView>
+          {/* <BottomTabNavigation /> */}
         </SafeAreaView>
       );
     };

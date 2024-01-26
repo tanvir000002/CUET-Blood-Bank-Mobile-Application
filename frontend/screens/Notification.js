@@ -1,16 +1,3 @@
-/*
-import { View, Text, FlatList, TouchableOpacity, Image } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import PageContainer from '../components/PageContainer';
-import { images, COLORS, FONTS, SIZES } from '../constants';
-import { MaterialIcons } from '@expo/vector-icons'
-import { axiosInstance } from '../config/axios'; 
-import  { useEffect, useState } from 'react'
-import moment from 'moment';
-
-import { Entypo } from '@expo/vector-icons';
-import { calculateTimeAgo } from '../utils/shared/calculateTime';*/
-//import LinearGradient from 'react-native-linear-gradient';/import LinearGradient from 'react-native-linear-gradient';
 import React from 'react';
 import { View, Text, FlatList, TouchableOpacity, Image, Animated } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -87,11 +74,11 @@ const Notification = ({ navigation }) => {
         style={{
           flexDirection: 'row',
           alignItems: 'center',
-          backgroundColor: '#E6F7FF',
+          backgroundColor: '#FFFFFF',
           paddingVertical: 12,
         //  borderBottomWidth: 1,
          // borderBottomColor: COLORS.lightGray,
-          backgroundColor,
+          // backgroundColor,
           marginBottom: 8,
           borderRadius: 10,
           shadowColor: '#000',
@@ -140,7 +127,7 @@ const Notification = ({ navigation }) => {
           }}
         >
              {renderHeader()}
-          <Text style={{ ...FONTS.h2, color:COLORS.black }}>Notifications</Text>
+          {/* <Text style={{ ...FONTS.h2, color:COLORS.black }}>Notifications</Text> */}
           {/* Add a button or icon for clearing notifications or navigating back */}
         </View>
 
