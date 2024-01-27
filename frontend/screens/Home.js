@@ -10,8 +10,18 @@ import { donationRequests } from '../constants/data'
 import axios from 'axios';
 import { axiosInstance } from '../config/axios'
 import Post from './Post'
-
+import { useFocusEffect } from '@react-navigation/native';
 const Home =  ({ navigation }) => {
+
+
+  useFocusEffect(
+    React.useCallback(() => {
+      // Your logic to run when the screen is focused
+      console.log('Screen is focused. Add your logic here.');
+    }, [])
+  );
+
+
     const [position, setPosition] = useState(0)
     const [dataSource, setDataSource] = useState([
       {
@@ -35,6 +45,7 @@ const Home =  ({ navigation }) => {
         .get('/posts')
         .then(({ data }) => {
           setPosts(data);
+          
         })
         .catch((error) => console.error("Error fetching posts:", error));
     }, [posts]);

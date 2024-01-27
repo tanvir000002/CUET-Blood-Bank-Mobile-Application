@@ -9,7 +9,7 @@ import {
 } from '@expo/vector-icons'
 import React from 'react'
 import { COLORS } from '../constants'
-import { DonationRequest, Home, Profile, Report, Search,Post,Notification,NotificationPost} from '../screens'
+import { DonationRequest, Home,EditProfile,EditPost, Profile, Report, Search,Post,Notification,NotificationPost} from '../screens'
 import { Platform } from 'react-native'
 
 const Tab = createBottomTabNavigator()

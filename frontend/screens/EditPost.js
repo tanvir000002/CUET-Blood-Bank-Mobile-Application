@@ -45,7 +45,7 @@ const EditPost = ({ navigation,route}) => {
             })
             .then(({ data }) => {
                 // localStorage.clear();
-                navigation.navigate('Home')
+                navigation.replace('BottomTabNavigation');
             })
             .catch((error) => alert(error.message))
     }
