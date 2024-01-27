@@ -41,7 +41,7 @@ const EditProfile = ({ navigation }) => {
                 available: formState.inputValues.available,
             })
             .then(({ data }) => {
-                navigation.navigate('BottomTabNavigation')
+                navigation.navigate('Login')
             })
             .catch((error) => alert(error.message))
     }
