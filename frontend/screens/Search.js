@@ -14,7 +14,6 @@ import React, { useState,useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import PageContainer from '../components/PageContainer'
 import { COLORS, SIZES, FONTS, images, icons } from '../constants'
-//import { AntDesign, MaterialCommunityIcons, MaterialIcons, Fontisto } from '@expo/vector-icons';
 import {
     AntDesign,
     MaterialIcons,
@@ -153,10 +152,10 @@ const Search = ({ navigation }) => {
                 style={{
                     flexDirection: 'row',
                     alignItems: 'center',
-                    height: 250,
+                    height: 220,
                     borderColor: COLORS.secondaryGray,
                     borderWidth: 0.5,
-                    marginVertical: 2,
+                    marginVertical: 3,
                     borderRadius: 10,
                 }}
             >
@@ -167,26 +166,42 @@ const Search = ({ navigation }) => {
                         marginVertical: 15, 
                     }}
                 >
-                    <Text
+                    <View
+                        style={{
+                            flexDirection: 'row',
+                            justifyContent: 'center',
+                            marginVertical: 12, 
+                            marginTop: 21, 
+                        }}
+                    >
+                        <Entypo
+                            name="user"
+                            size={23}
+                            color={COLORS.primary}
+                        />
+                        <Text
                         style={{
                             ...FONTS.body4,
+                            fontSize: 20,
                             fontWeight: 'bold',
-                            marginLeft: 4,
-                            marginBottom: 2,
+                            
+                            marginLeft: 14,
+                            marginBottom: 8,
                         }}
                     >
                         {item.name}
                     </Text>
+                    </View>
                     <View
                         style={{
                             flexDirection: 'row',
-                            marginVertical: 2,
+                            marginVertical: 5,
                             justifyContent: 'center',
                         }}
                     >
                         <EvilIcons
                             name="location"
-                            size={26}
+                            size={33}
                             color={COLORS.primary}
                         />
                         <TouchableOpacity style={styles0.button}
@@ -196,10 +211,11 @@ const Search = ({ navigation }) => {
                     
                 >
                     <Text style={styles0.text}>{item.location}</Text>
+                    
                 </TouchableOpacity>
-                    </View>
+                </View>
 
-                    <View>
+                <View >
                 <TouchableOpacity
                     onPress={() => {
                         const url = `tel:${item.number}`;
@@ -207,7 +223,7 @@ const Search = ({ navigation }) => {
                     }}
                     style={styles.callNowButton}
                 >
-                    <AntDesign name="phone" size={24} color={COLORS.white} />
+                    <AntDesign name="phone" size={20} color={COLORS.white} />
                     <Text style={styles.callNowButtonText}>Call Now</Text>
                 </TouchableOpacity>
                 </View>
@@ -217,8 +233,8 @@ const Search = ({ navigation }) => {
                             justifyContent: 'center',
                         }}
                     >
-                        <EvilIcons
-                            //name="location"
+                        <MaterialIcons
+                            name="event-available"
                             size={24}
                             color={COLORS.primary}
                         />
@@ -542,7 +558,7 @@ const Search = ({ navigation }) => {
 }
 const styles0 = StyleSheet.create({
     button: {
-      padding: 10,
+      padding: 7,
       backgroundColor: '#3498db',
       borderRadius: 5,
     },

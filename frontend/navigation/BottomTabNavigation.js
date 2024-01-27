@@ -108,25 +108,6 @@ const BottomTabNavigation = () => {
 
          
 
-            {/* <Tab.Screen
-                name="DonationRequest"
-                component={DonationRequest}
-                options={{
-                    tabBarIcon: ({ focused }) => {
-                        return (
-                            <MaterialIcons
-                                name="show-chart"
-                                size={24}
-                                color={
-                                    focused
-                                        ? COLORS.primary
-                                        : COLORS.secondaryBlack
-                                }
-                            />
-                        )
-                    },
-                }}
-            /> */}
 
             <Tab.Screen
                 name="Notification"
@@ -147,25 +128,7 @@ const BottomTabNavigation = () => {
                     },
                 }}
             />
-            {/* <Tab.Screen
-                name="NotificationPost"
-                component={NotificationPost}
-                options={{
-                    tabBarIcon: ({ focused }) => {
-                        return (
-                            <MaterialIcons
-                                name="notifications"
-                                size={24}
-                                color={
-                                    focused
-                                        ? COLORS.primary
-                                        : COLORS.secondaryBlack
-                                }
-                            />
-                        )
-                    },
-                }}
-            /> */}
+
             <Tab.Screen
                 name="Profile"
                 component={Profile}

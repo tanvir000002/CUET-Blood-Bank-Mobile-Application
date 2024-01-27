@@ -10,7 +10,7 @@ import Button from '../components/Button'
 import { reducer } from '../utils/reducers/formReducers'
 import { validateInput } from '../utils/actions/formActions'
 import { axiosInstance } from '../config/axios'
-
+import BottomTabNavigation from '../navigation/BottomTabNavigation'
 const initialState = {
     inputValidities: {
         email: false,
