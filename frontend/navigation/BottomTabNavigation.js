@@ -9,7 +9,7 @@ import {
 } from '@expo/vector-icons'
 import React from 'react'
 import { COLORS } from '../constants'
-import { DonationRequest, Home, Profile, Report, Search,Post,Notification} from '../screens'
+import { DonationRequest, Home, Profile, Report, Search,Post,Notification,NotificationPost} from '../screens'
 import { Platform } from 'react-native'
 
 const Tab = createBottomTabNavigator()
@@ -147,6 +147,25 @@ const BottomTabNavigation = () => {
                     },
                 }}
             />
+            {/* <Tab.Screen
+                name="NotificationPost"
+                component={NotificationPost}
+                options={{
+                    tabBarIcon: ({ focused }) => {
+                        return (
+                            <MaterialIcons
+                                name="notifications"
+                                size={24}
+                                color={
+                                    focused
+                                        ? COLORS.primary
+                                        : COLORS.secondaryBlack
+                                }
+                            />
+                        )
+                    },
+                }}
+            /> */}
             <Tab.Screen
                 name="Profile"
                 component={Profile}
