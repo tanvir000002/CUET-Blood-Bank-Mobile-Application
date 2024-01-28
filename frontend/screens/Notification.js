@@ -39,7 +39,7 @@ const Notification = ({ navigation }) => {
                         color={COLORS.black}
                     />
                 </TouchableOpacity>
-                
+                <Text style={{ ...FONTS.h4 ,marginLeft:20,alignSelf: 'flex-end'}}>Notification</Text>
             </View>
         )
     }
@@ -64,7 +64,7 @@ const Notification = ({ navigation }) => {
 
   // Render a single notification item
   const renderNotificationItem = ({ item }) => {
-    const backgroundColor = '#FFD1DC';
+    const backgroundColor = '#B0E0E6';
     const formattedTime = calculateTimeAgo(item.createdAt);
     return (
         
@@ -75,7 +75,7 @@ const Notification = ({ navigation }) => {
           flexDirection: 'row',
           alignItems: 'center',
           // backgroundColor: '#FFFFFF',
-          paddingVertical: 12,
+          paddingVertical: 10,
         //  borderBottomWidth: 1,
          // borderBottomColor: COLORS.lightGray,
           backgroundColor,
@@ -83,10 +83,10 @@ const Notification = ({ navigation }) => {
           borderRadius: 10,
           shadowColor: '#000',
           shadowOffset: {
-            width: 0,
+            width: 10,
             height: 2,
           },
-          shadowOpacity: 0.2,
+          shadowOpacity: 10,
           shadowRadius: 3,
           elevation: 5, 
           zIndex: 1,
@@ -103,10 +103,11 @@ const Notification = ({ navigation }) => {
             marginRight: -20,
           }}
         />
-      <FontAwesome name="heartbeat" size={28} color={COLORS.red} />
+      <FontAwesome name="heartbeat" size={35} color={COLORS.red} />
         <View style={{ flex: 1 ,marginLeft: 10 ,backgroundColor: '#F9F9F9', padding: 10, borderRadius: 8, borderWidth: 1, borderColor: COLORS.red  }}>
-          <Text style={{ ...FONTS.h5,color: COLORS.pink}}>{item.notification}</Text>
-          <Text style={{ ...FONTS.body4, color: COLORS.black }}>{formattedTime}</Text>
+          <Text style={{ ...FONTS.h5,color: COLORS.blue}}>{item.notification}</Text>
+          <Text style={{ ...FONTS.body4, color: COLORS.black }}>{formattedTime}...</Text>
+       
 
         </View>
       </TouchableOpacity>
