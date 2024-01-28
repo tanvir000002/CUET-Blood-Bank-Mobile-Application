@@ -95,6 +95,8 @@ const Search = ({ navigation }) => {
                         marginVertical: 12,
                         paddingHorizontal: 22,
                         borderRadius: 4,
+                        borderWidth:.5,
+                        borderColor: COLORS.secondaryGray,
                     }}
                 >
                     <TextInput
@@ -122,6 +124,8 @@ const Search = ({ navigation }) => {
                         paddingHorizontal: 22,
                         marginBottom: 12,
                         borderRadius: 4,
+                        borderWidth:.5,
+                        borderColor: COLORS.secondaryGray,
                     }}
                 >
                     <TextInput
@@ -153,10 +157,10 @@ const Search = ({ navigation }) => {
                     flexDirection: 'row',
                     alignItems: 'center',
                     height: 190,
-                    borderColor: COLORS.secondaryGray,
-                    borderWidth: 0.5,
-                    marginVertical: 3,
-                    borderRadius: 10,
+                    borderColor: COLORS.red,
+                    borderWidth: 1,
+                    marginVertical: 5,
+                    borderRadius: 20,
                 }}
             >
                 <View
