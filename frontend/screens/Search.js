@@ -25,7 +25,7 @@ import {
 import { donors } from '../constants/data'
 import MapView from 'react-native-maps'
 import axios from 'axios';
-
+import { FontAwesome } from '@expo/vector-icons';
 const Search = ({ navigation }) => {
     const [search, setSearch] = useState('')
     const [filteredDonors, setFilteredDonors] = useState(donors)
@@ -152,7 +152,7 @@ const Search = ({ navigation }) => {
                 style={{
                     flexDirection: 'row',
                     alignItems: 'center',
-                    height: 220,
+                    height: 190,
                     borderColor: COLORS.secondaryGray,
                     borderWidth: 0.5,
                     marginVertical: 3,
@@ -171,10 +171,10 @@ const Search = ({ navigation }) => {
                             flexDirection: 'row',
                             justifyContent: 'center',
                             marginVertical: 12, 
-                            marginTop: 21, 
+                            marginTop: 5, 
                         }}
                     >
-                        <Entypo
+                        <AntDesign
                             name="user"
                             size={23}
                             color={COLORS.primary}
@@ -255,7 +255,7 @@ const Search = ({ navigation }) => {
                 <View
                     style={{
                         position: 'absolute',
-                        right: 2,
+                        right: 10,
                     }}
                 >
                     <Image
@@ -604,9 +604,9 @@ const styles = StyleSheet.create({
     },
     callNowButton: {
       backgroundColor: COLORS.primary,
-      marginVertical: 20,
-      marginBottom: 25,
-      marginLeft: 25,
+      marginVertical: 10,
+      marginBottom: 10,
+      marginleft: 50,
       width: 104,
       height: 35,
       borderRadius: SIZES.padding,
